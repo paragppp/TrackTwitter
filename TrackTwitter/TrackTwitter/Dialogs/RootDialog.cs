@@ -41,11 +41,11 @@ namespace TrackTwitter.Dialogs
                 }
                 else if (text.Contains("welcome"))
                 {
-                    await SendHelpMessage(context, "## Hi, I'm the TrackTwitter bot");
+                    await context.PostAsync("## Hi, I'm the TrackTwitter bot");
                 }
                 else
                 {
-                    await SendHelpMessage(context, "I'm sorry, I did not understand you :(");
+                    await context.PostAsync("I'm sorry, I did not understand you :(");
                 }
             }
             else
@@ -53,11 +53,14 @@ namespace TrackTwitter.Dialogs
                 var q = split.Skip(1);
                 var cmd = split[0];
 
+                await context.PostAsync($"Command was {cmd} and parameters were {split[1]}");
+
                 // Parse the command and go do the right thing
-                if(cmd.Contains("addid"))
-                {
-                    await SendTaskMessage(context, string.Join(" ", q));
-                }
+                //if (cmd.Contains("addid"))
+                //{
+                //    await context.PostAsync($"Command was {cmd} and parameters were {split[1]}");
+                    //await SendTaskMessage(context, string.Join(" ", q));
+                //}
                 /*if (cmd.Contains("create") || cmd.Contains("find"))
                 {
                     await SendTaskMessage(context, string.Join(" ", q));
@@ -113,7 +116,7 @@ namespace TrackTwitter.Dialogs
                         reply.Attachments.Add(card.ToAttachment());
                         */
 
-            reply.Text = command;
+            reply.Text = $"command was: {command}";
 
             ConnectorClient client = new ConnectorClient(new Uri(context.Activity.ServiceUrl));
             ResourceResponse resp = await client.Conversations.ReplyToActivityAsync((Activity)reply);

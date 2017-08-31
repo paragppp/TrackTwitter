@@ -39,7 +39,12 @@ namespace TrackTwitter
 
             
             ConnectorClient client = new ConnectorClient(new Uri(activity.ServiceUrl));
-            
+
+            Activity act = new Activity();
+
+            act.Text = $"query = {query}";
+
+            client.Conversations.ReplyToActivity(act);
             
             //Check to make sure a query was actually made:
             if (query.CommandId == null || query.Parameters == null)

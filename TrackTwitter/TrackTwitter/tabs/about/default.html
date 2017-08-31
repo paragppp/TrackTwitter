@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>About Page</title>
+</head>
+<body>
+    <script src="https://statics.teams.microsoft.com/sdk/v1.0/js/MicrosoftTeams.min.js"></script>
+    <script type="text/javascript">
+        microsoftTeams.initialize();
+        microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
+            microsoftTeams.settings.setSettings({
+                entityId: "rootPage",
+                contentUrl: "https://tracktwitter.azurewebsites.net/tabs/powerbi.html",
+                suggestedDisplayName: "Track Twitter",
+                websiteUrl: "https://tracktwitter.azurewebsites.net/tabs/powerbi.html",
+                removeUrl: "https://tracktwitter.azurewebsites.net/tabs/about/default.html",
+            });
+
+            saveEvent.notifySuccess();
+        });
+
+        microsoftTeams.settings.setValidityState(true);
+    </script>
+    <h1>About Track Twitter</h1>
+</body>
+</html>
